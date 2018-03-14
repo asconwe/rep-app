@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import { post } from 'axios';
-import LoginVue from './Login';
+import axios from 'axios';
+import LoginVue from '@/components/authentication/login/Login';
 
 export default {
   components: {
@@ -25,11 +25,17 @@ export default {
   methods: {
     handleSubmit(data) {
       this.loginState = 'SUBMITTED';
-      post('https://localhost:3000/auth/login', data)
-        .then(({ response }) => {
+      axios({
+        method: 'POST',
+        url: `${BASE_URL}/auth/login`,
+        data,
+        xsrfCookieName: 'session',
+        withCredentials: true,
+      })
+        .then((result) => {
           // eslint-disable-next-line
-          console.log('===Success===\n', response);
-          this.handleSuccess(response.data);
+          console.log('===Success===\n', result);
+          this.handleSuccess(result.data);
         })
         .catch(({ response }) => {
           // eslint-disable-next-line

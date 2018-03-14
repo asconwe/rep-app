@@ -1,5 +1,6 @@
 <template>
   <form @submit="handleSubmit">
+    <h1>Log in!</h1>
     <div v-if="status === 'FAILED'">{{statusMessage}}</div>
     <label for="email">Email</label>
     <input type="text" id="email" v-model="email">
