@@ -23,6 +23,10 @@ module.exports = {
       }
     }
   },
+  // add custom global variables here
+  globals: {
+    "BASE_URL": true,
+  },
   // add your custom rules here
   rules: {
     // don't require .vue extension when importing
