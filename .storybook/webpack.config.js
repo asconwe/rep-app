@@ -1,6 +1,7 @@
 const path = require('path')
 const utils = require('../build/utils')
 const vueLoaderConfig = require('../build/vue-loader.conf')
+const webpack = require('webpack')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 function resolve (dir) {
@@ -27,9 +28,13 @@ module.exports = {
           formatter: require('eslint-friendly-formatter')
         }
       }  
-    ]
+    ],
   },
   plugins: [
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': require('../config/dev.env'),
+      'BASE_URL': '"https://localhost:3000"'
+    }),
   ]
 }
