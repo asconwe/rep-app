@@ -14,7 +14,7 @@
 import axios from 'axios';
 
 export default {
-  props: ['site_id'],
+  props: ['siteId'],
   data() {
     return {
       first: '',
@@ -25,12 +25,17 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      axios.post(`https://localhost:3000/api/invitation/${this.site_id}`, {
-        firsName: this.first,
-        lastName: this.last,
-        email: this.email,
+      axios({
+        url: `${BASE_URL}/api/invitation/${this.siteId}`,
+        data: {
+          firsName: this.first,
+          lastName: this.last,
+          email: this.email,
+        },
+        withCredentials: true,
+        method: 'POST',
       })
-      // eslint-disable-next-line
+        // eslint-disable-next-line
         .then(response => console.log(response))
         // eslint-disable-next-line
         .catch(error => console.log(error));

@@ -8,7 +8,13 @@ storiesOf('dashboard/AddRep', module)
     components: { AddRep, AppStyle },
     template: `
       <app-style>
-        <add-rep />
+        <add-rep :site-id="id" />
+        <input type="text" v-model="id" />
       </app-style>
     `,
+    data() {
+      return {
+        id: '5aa872cad43ff303b47baa73',
+      };
+    },
   }));
