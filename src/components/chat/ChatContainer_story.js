@@ -8,7 +8,7 @@ storiesOf('chat/ChatContainer', module)
     components: { ChatContainer, AppStyle },
     template: `
       <app-style>
-        <chat-container socketUrl="http://localhost:3000" name="August Conwell"/>
+        <chat-container socketUrl="https://localhost:3000" name="August Conwell"/>
       </app-style>
     `,
   }));
