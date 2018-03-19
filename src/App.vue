@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import ChatContainer from 'components/ChatContainer'
+import ChatContainer from 'components/ChatContainer';
 
 export default {
   components: {
-    'ac-chat-container': ChatContainer
-  }
-}
+    'ac-chat-container': ChatContainer,
+  },
+};
 </script>
 
 <style>
