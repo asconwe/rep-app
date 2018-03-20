@@ -13,10 +13,15 @@
 import Message from './Message';
 
 export default {
+  props: {
+    messages: {
+      type: Array,
+      required: true,
+    },
+  },
   components: {
     'ac-message': Message,
   },
-  props: ['messages'],
 };
 </script>
 
