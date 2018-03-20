@@ -1,14 +1,22 @@
 <template>
 <div class="message-outer">
-  <div :class="`message ${this.received ? 'received' : 'sent'}`">
-    {{message}}
+  <div :class="`message ${this.received ? 'received' : 'sent'}`" v-html="message">
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  props: ['received', 'message'],
+  props: {
+    received: {
+      type: Boolean,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+  },
 };
 </script>
 
