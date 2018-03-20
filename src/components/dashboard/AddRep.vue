@@ -14,7 +14,20 @@
 import axios from 'axios';
 
 export default {
-  props: ['siteId'],
+  props: {
+    handleSuccess: {
+      type: Function,
+      required: true,
+    },
+    handleFailure: {
+      type: Function,
+      required: true,
+    },
+    siteId: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       first: '',
@@ -35,10 +48,8 @@ export default {
         withCredentials: true,
         method: 'POST',
       })
-        // eslint-disable-next-line
-        .then(response => console.log(response))
-        // eslint-disable-next-line
-        .catch(error => console.log(error));
+        .then(response => this.handleSuccess(response))
+        .catch(error => this.handleFailure(error));
     },
   },
 };

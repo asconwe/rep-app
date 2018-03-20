@@ -12,7 +12,12 @@ export default {
   components: {
     'ac-login': LoginVue,
   },
-  props: ['handleSuccess'],
+  props: {
+    handleSuccess: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       loginState: '',
@@ -33,13 +38,9 @@ export default {
         withCredentials: true,
       })
         .then((result) => {
-          // eslint-disable-next-line
-          console.log('===Success===\n', result);
           this.handleSuccess(result.data);
         })
         .catch(({ response }) => {
-          // eslint-disable-next-line
-          console.log('====Fail====\n', response);
           this.message = response.data.message;
           this.loginState = 'FAILED';
         });

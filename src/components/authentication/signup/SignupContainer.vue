@@ -12,7 +12,12 @@ export default {
   components: {
     'ac-signup': Signup,
   },
-  props: ['handleSuccess'],
+  props: {
+    handleSuccess: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       signupState: '',
@@ -27,13 +32,9 @@ export default {
       this.signupState = 'SUBMITTED';
       post(`${BASE_URL}/auth/signup`, formData)
         .then(({ data }) => {
-          // eslint-disable-next-line
-          console.log('===Success===\n', data);
           this.handleSuccess(data);
         })
         .catch(({ response }) => {
-          // eslint-disable-next-line
-          console.log('====Fail====\n', response);
           if (response.status === 500) {
             this.message = 'There was an error on the server. Please try again later.';
             return;

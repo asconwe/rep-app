@@ -13,6 +13,16 @@
 import axios from 'axios';
 
 export default {
+  props: {
+    handleSuccess: {
+      type: Function,
+      required: true,
+    },
+    handleFailure: {
+      type: Function,
+      required: true,
+    },
+  },
   data() {
     return {
       name: '',
@@ -28,14 +38,8 @@ export default {
         // eslint-disable-next-line
         data: this._data
       })
-        .then((result) => {
-          // eslint-disable-next-line
-          console.log('result', result);
-        })
-        .catch((err) => {
-          // eslint-disable-next-line
-          console.log('err', err);
-        });
+        .then(result => this.handleSuccess(result))
+        .catch(err => this.handleFailure(err));
     },
   },
 };

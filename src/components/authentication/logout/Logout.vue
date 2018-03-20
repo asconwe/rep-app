@@ -6,6 +6,16 @@
 import axios from 'axios';
 
 export default {
+  props: {
+    handleSuccess: {
+      type: Function,
+      required: true,
+    },
+    handleFailure: {
+      type: Function,
+      required: true,
+    },
+  },
   methods: {
     logout() {
       axios({
@@ -13,10 +23,8 @@ export default {
         method: 'GET',
         url: `${BASE_URL}/auth/logout`,
       })
-      // eslint-disable-next-line
-        .then(res => console.log(res))
-        // eslint-disable-next-line
-        .catch(err => console.log(err));
+        .then(() => this.handleSuccess())
+        .catch(err => this.handleFailure(err));
     },
   },
 };
