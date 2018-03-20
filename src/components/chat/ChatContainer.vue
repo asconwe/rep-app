@@ -1,40 +1,38 @@
 <template>
   <div>
-    <ac-chat :send-message="sendMessage" :messages="messages" :message="message">
-      <div
-        v-contenteditable="message"
-        @keydown.enter.exact.prevent="sendMessage"
-        class="input-box"/>
-    </ac-chat>
+    <ac-chat :send-message="sendMessage" :messages="messages" />
   </div>
 </template>
 
 <script>
 import io from 'socket.io-client';
-import ChatVue from '@/components/chat/chat-presentation/Chat';
+import Chat from '@/components/chat/chat-presentation/Chat';
 
 export default {
   components: {
-    'ac-chat': ChatVue,
+    'ac-chat': Chat,
   },
-  props: ['socketUrl', 'name'],
+  props: {
+    socketUrl: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
-      message: '',
       socket: io(this.socketUrl),
       messages: [],
     };
   },
   methods: {
-    sendMessage() {
-      const newMessages = this.messages.concat({ message: this.message, received: false });
-      this.socket.emit('chat message', this.message);
-      this.message = '';
+    sendMessage(composedMessage) {
+      const newMessages = this.messages.concat({
+        message: composedMessage,
+        received: false,
+      });
+      this.socket.emit('chat message', composedMessage);
       this.messages = newMessages;
     },
-    // TODO
-    // Map ctl.enter, meta.enter, and alt.enter to shif.enter
-    // dispatchShiftEnter method
   },
 };
 </script>
