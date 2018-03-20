@@ -5,5 +5,5 @@ import SendButton from '@/components/chat/chat-presentation/message-input/SendBu
 storiesOf('chat/chat-presentation/SendButton', module)
   .add('story as a component', () => ({
     components: { SendButton },
-    template: '<send-button />',
+    template: '<send-button :stateChange="`populate`" />',
   }));
